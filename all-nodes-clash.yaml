@@ -47,8 +47,8 @@ proxy-groups:
   - name: PROXY
     type: select
     proxies:
-      - easyhost-Dallas
       - hanamii-Tokyo
+      - easyhost-Dallas
       - DIRECT
 
 rules:
