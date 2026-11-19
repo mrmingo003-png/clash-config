@@ -1,6 +1,6 @@
 # 全部节点 · Clash Verge / mihomo 配置
 # 导入：Clash Verge → 配置 → 新建 → 本地文件 → 选择本文件 → 设为活动配置
-# 含 deplexo-Frankfurt（实测出口法国斯特拉斯堡 OVH，约 7.8 Mbps）与 eurobase-Paris（实测出口法国巴黎 Scaleway，约 11 Mbps）
+# 含 eurobase-Paris（实测出口法国巴黎 Scaleway，约 11 Mbps）
 # PROXY 组为 url-test：每 300 秒测一次 generate_204，自动选最快的节点；想手动指定可在 Clash Verge 里把 PROXY 组切成 select
 mixed-port: 7890
 allow-lan: false
@@ -17,19 +17,6 @@ dns:
     - 8.8.8.8
 
 proxies:
-  - name: deplexo-Frankfurt
-    type: vless
-    server: xray-deplexo.de.deplexo.com
-    port: 443
-    uuid: 3dc58803-f96c-41b9-b1d2-fb3bb4bb0cbc
-    udp: true
-    tls: true
-    servername: xray-deplexo.de.deplexo.com
-    network: ws
-    ws-opts:
-      path: /ws-cd953c46
-      headers:
-        Host: xray-deplexo.de.deplexo.com
   - name: eurobase-Paris
     type: vless
     server: xray-eurobase.eurobase.dev
@@ -50,7 +37,6 @@ proxy-groups:
     url: http://www.gstatic.com/generate_204
     interval: 300
     proxies:
-      - deplexo-Frankfurt
       - eurobase-Paris
 
 rules:
