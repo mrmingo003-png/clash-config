@@ -1,6 +1,6 @@
 # 全部节点 · Clash Verge / mihomo 配置
 # 导入：Clash Verge → 配置 → 新建 → 本地文件 → 选择本文件 → 设为活动配置
-# 含 eurobase-Paris（实测出口法国巴黎 Scaleway，约 11 Mbps）
+# 含 eurobase-Paris（实测出口法国巴黎 Scaleway，约 11 Mbps）与 mshost-India（实测出口印度印多尔 Reliance Jio，约 5.7 Mbps；免费期至 2026-12-20）
 # PROXY 组为 url-test：每 300 秒测一次 generate_204，自动选最快的节点；想手动指定可在 Clash Verge 里把 PROXY 组切成 select
 mixed-port: 7890
 allow-lan: false
@@ -30,6 +30,19 @@ proxies:
       path: /ws-17d4331c
       headers:
         Host: xray-eurobase.eurobase.dev
+  - name: mshost-India
+    type: vless
+    server: app-6aff01e7.deploy.meerasolution.com
+    port: 443
+    uuid: ec431706-40b5-432d-a63d-17e462113243
+    udp: true
+    tls: true
+    servername: app-6aff01e7.deploy.meerasolution.com
+    network: ws
+    ws-opts:
+      path: /ws-dfdfee87
+      headers:
+        Host: app-6aff01e7.deploy.meerasolution.com
 
 proxy-groups:
   - name: PROXY
@@ -38,6 +51,7 @@ proxy-groups:
     interval: 300
     proxies:
       - eurobase-Paris
+      - mshost-India
 
 rules:
   - MATCH,PROXY
