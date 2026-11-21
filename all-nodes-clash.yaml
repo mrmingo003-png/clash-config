@@ -1,6 +1,6 @@
 # 全部节点 · Clash Verge / mihomo 配置
 # 导入：Clash Verge → 配置 → 新建 → 本地文件 → 选择本文件 → 设为活动配置
-# 含 eurobase-Paris（实测出口法国巴黎 Scaleway，约 11 Mbps）、mshost-India（实测出口印度印多尔 Reliance Jio，约 5.7 Mbps；免费期至 2026-12-20；XHTTP 在该平台不通，只有 WS）、alwaysdata-Paris（实测出口法国巴黎 alwaysdata，约 14.5 Mbps；WS 与 XHTTP 均通，现两个协议都放订阅）与 deployvera-Istanbul（实测出口土耳其伊斯坦布尔，约 13.5 Mbps；WS 与 XHTTP 均通，现两个协议都放订阅）
+# 含 eurobase-Paris（实测出口法国巴黎 Scaleway，约 11 Mbps）、mshost-India（实测出口印度印多尔 Reliance Jio，约 5.7 Mbps；免费期至 2026-12-20；XHTTP 在该平台不通，只有 WS）与 alwaysdata-Paris（实测出口法国巴黎 alwaysdata，约 14.5 Mbps；WS 与 XHTTP 均通，现两个协议都放订阅）
 # PROXY 组为 select：手动选节点（2026-11-20 用户要求，不再自动测速）；默认选中第一个 eurobase-Paris
 mixed-port: 7890
 allow-lan: false
@@ -70,34 +70,6 @@ proxies:
       mode: stream-one
       headers:
         Host: mingo003.alwaysdata.net
-  - name: deployvera-Istanbul
-    type: vless
-    server: xray-deployvera-7fb82f.apps.deployvera.com
-    port: 443
-    uuid: 0a9752f2-0599-47ca-b77a-951b0f0d5b7a
-    udp: true
-    tls: true
-    servername: xray-deployvera-7fb82f.apps.deployvera.com
-    network: ws
-    ws-opts:
-      path: /ws-5c8314b6
-      headers:
-        Host: xray-deployvera-7fb82f.apps.deployvera.com
-  - name: deployvera-Istanbul-XHTTP
-    type: vless
-    server: xray-deployvera-7fb82f.apps.deployvera.com
-    port: 443
-    uuid: 0a9752f2-0599-47ca-b77a-951b0f0d5b7a
-    udp: true
-    tls: true
-    servername: xray-deployvera-7fb82f.apps.deployvera.com
-    network: xhttp
-    xhttp-opts:
-      path: /ws-5c8314b6
-      mode: stream-one
-      headers:
-        Host: xray-deployvera-7fb82f.apps.deployvera.com
-
 proxy-groups:
   - name: PROXY
     type: select
@@ -106,8 +78,6 @@ proxy-groups:
       - mshost-India
       - alwaysdata-Paris
       - alwaysdata-Paris-XHTTP
-      - deployvera-Istanbul
-      - deployvera-Istanbul-XHTTP
 
 rules:
   - MATCH,PROXY
