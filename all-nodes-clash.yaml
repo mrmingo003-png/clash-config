@@ -1,6 +1,6 @@
 # 全部节点 · Clash Verge / mihomo 配置
 # 导入：Clash Verge → 配置 → 新建 → 本地文件 → 选择本文件 → 设为活动配置
-# 含 eurobase-Paris（实测出口法国巴黎 Scaleway，约 11 Mbps）、mshost-India（实测出口印度印多尔 Reliance Jio，约 5.7 Mbps；免费期至 2026-12-20；XHTTP 在该平台不通，只有 WS）与 alwaysdata-Paris（实测出口法国巴黎 alwaysdata，约 14.5 Mbps；WS 与 XHTTP 均通，现两个协议都放订阅）
+# 含 eurobase-Paris（实测出口法国巴黎 Scaleway，约 11 Mbps）、mshost-India（实测出口印度印多尔 Reliance Jio，约 5.7 Mbps；免费期至 2026-12-20；XHTTP 在该平台不通，只有 WS）、alwaysdata-Paris（实测出口法国巴黎 alwaysdata，约 14.5 Mbps；WS 与 XHTTP 均通，现两个协议都放订阅）与 cloady-France（实测出口法国劳特堡 Contabo，2026-11-23 测速约 0.1 Mbps 很慢，疑为 Cloady 欧盟网络故障，待复测；只有 WS）
 # PROXY 组为 select：手动选节点（2026-11-20 用户要求，不再自动测速）；默认选中第一个 eurobase-Paris
 mixed-port: 7890
 allow-lan: false
@@ -70,6 +70,19 @@ proxies:
       mode: stream-one
       headers:
         Host: mingo003.alwaysdata.net
+  - name: cloady-France
+    type: vless
+    server: edge-ws-eu-vytcwlqv-mrmingo003-png.cloady.io
+    port: 443
+    uuid: 5a7ff594-41fc-417a-8f5b-90903a50650c
+    udp: true
+    tls: true
+    servername: edge-ws-eu-vytcwlqv-mrmingo003-png.cloady.io
+    network: ws
+    ws-opts:
+      path: /ws-ade834b5
+      headers:
+        Host: edge-ws-eu-vytcwlqv-mrmingo003-png.cloady.io
 proxy-groups:
   - name: PROXY
     type: select
@@ -78,6 +91,7 @@ proxy-groups:
       - mshost-India
       - alwaysdata-Paris
       - alwaysdata-Paris-XHTTP
+      - cloady-France
 
 rules:
   - MATCH,PROXY
