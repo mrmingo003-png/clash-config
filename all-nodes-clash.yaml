@@ -1,7 +1,7 @@
 # 全部节点 · Clash Verge / mihomo 配置
 # 导入：Clash Verge → 配置 → 新建 → 本地文件 → 选择本文件 → 设为活动配置
-# 含 eurobase-Paris（实测出口法国巴黎 Scaleway，约 11 Mbps）、mshost-India（实测出口印度印多尔 Reliance Jio，约 5.7 Mbps；免费期至 2026-12-20；XHTTP 在该平台不通，只有 WS）、alwaysdata-Paris（实测出口法国巴黎 alwaysdata，约 14.5 Mbps；WS 与 XHTTP 均通，现两个协议都放订阅）、cloady-France（实测出口法国劳特堡 Contabo，2026-11-23 测速约 0.1 Mbps 很慢，疑为 Cloady 欧盟网络故障，待复测；只有 WS）与 nodaroo-Sweden（瑞典斯德哥尔摩，VLESS+WS 明文 http、无 TLS，端口 25723；2026-11-24 新加，待用户真机实测）
-# PROXY 组为 select：手动选节点（2026-11-20 用户要求，不再自动测速）；默认选中第一个 eurobase-Paris
+# 含 VLESS+WS 法国巴黎（实测出口法国巴黎 Scaleway，约 11 Mbps）、VLESS+WS 印度印多尔（实测出口印度印多尔 Reliance Jio，约 5.7 Mbps；免费期至 2026-12-20；XHTTP 在该平台不通，只有 WS）、VLESS+WS 法国巴黎2（实测出口法国巴黎 alwaysdata，约 14.5 Mbps；WS 与 XHTTP 均通，现两个协议都放订阅）、VLESS+XHTTP 法国巴黎（与上条同站 XHTTP 协议，客户端须用 stream-one）、VLESS+WS 法国劳特堡（实测出口法国劳特堡 Contabo，2026-11-23 测速约 0.1 Mbps 很慢，疑为 Cloady 欧盟网络故障，待复测；只有 WS）、VLESS+WS 瑞典斯德哥尔摩（VLESS+WS 明文 http、无 TLS，端口 25723；2026-11-24 新加，待用户真机实测）与 VLESS+WS 美国达拉斯（实测出口美国沃斯堡 Redoubt AS400304，约 17 Mbps；Synteq Apps 免费档 0.25 vCPU/512MB/250GB，需绑卡在档，免费档不扣费；仅达拉斯落点；2026-11-29 新加，已验通）
+# PROXY 组为 select：手动选节点（2026-11-20 用户要求，不再自动测速）；默认选中第一个 VLESS+WS 法国巴黎
 mixed-port: 7890
 allow-lan: false
 mode: rule
@@ -17,7 +17,7 @@ dns:
     - 8.8.8.8
 
 proxies:
-  - name: eurobase-Paris
+  - name: VLESS+WS 法国巴黎
     type: vless
     server: xray-eurobase.eurobase.dev
     port: 443
@@ -30,7 +30,7 @@ proxies:
       path: /ws-17d4331c
       headers:
         Host: xray-eurobase.eurobase.dev
-  - name: mshost-India
+  - name: VLESS+WS 印度印多尔
     type: vless
     server: app-6aff01e7.deploy.meerasolution.com
     port: 443
@@ -43,7 +43,7 @@ proxies:
       path: /ws-dfdfee87
       headers:
         Host: app-6aff01e7.deploy.meerasolution.com
-  - name: alwaysdata-Paris
+  - name: VLESS+WS 法国巴黎2
     type: vless
     server: mingo003.alwaysdata.net
     port: 443
@@ -56,7 +56,7 @@ proxies:
       path: /ws-08cc8bd9
       headers:
         Host: mingo003.alwaysdata.net
-  - name: alwaysdata-Paris-XHTTP
+  - name: VLESS+XHTTP 法国巴黎
     type: vless
     server: mingo003.alwaysdata.net
     port: 443
@@ -70,7 +70,7 @@ proxies:
       mode: stream-one
       headers:
         Host: mingo003.alwaysdata.net
-  - name: cloady-France
+  - name: VLESS+WS 法国劳特堡
     type: vless
     server: edge-ws-eu-vytcwlqv-mrmingo003-png.cloady.io
     port: 443
@@ -83,7 +83,7 @@ proxies:
       path: /ws-ade834b5
       headers:
         Host: edge-ws-eu-vytcwlqv-mrmingo003-png.cloady.io
-  - name: nodaroo-Sweden
+  - name: VLESS+WS 瑞典斯德哥尔摩
     type: vless
     server: se1.nodaroo.fun
     port: 25723
@@ -93,16 +93,30 @@ proxies:
     network: ws
     ws-opts:
       path: /ws-197c31a1
+  - name: VLESS+WS 美国达拉斯
+    type: vless
+    server: edge-notes.synteq.app
+    port: 443
+    uuid: a344b802-09f8-43bb-a678-6ccd186f9ada
+    udp: true
+    tls: true
+    servername: edge-notes.synteq.app
+    network: ws
+    ws-opts:
+      path: /ws-8d022eca
+      headers:
+        Host: edge-notes.synteq.app
 proxy-groups:
   - name: PROXY
     type: select
     proxies:
-      - eurobase-Paris
-      - mshost-India
-      - alwaysdata-Paris
-      - alwaysdata-Paris-XHTTP
-      - cloady-France
-      - nodaroo-Sweden
+      - VLESS+WS 法国巴黎
+      - VLESS+WS 印度印多尔
+      - VLESS+WS 法国巴黎2
+      - VLESS+XHTTP 法国巴黎
+      - VLESS+WS 法国劳特堡
+      - VLESS+WS 瑞典斯德哥尔摩
+      - VLESS+WS 美国达拉斯
 
 rules:
   - MATCH,PROXY
